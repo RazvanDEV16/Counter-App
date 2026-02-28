@@ -1,7 +1,7 @@
 let number = 0;
 
-const clickSound = new Audio('click.mp3');
-const resetSound = new Audio('reset.mp3');
+const clickSound = new Audio("Click.mp3");
+const resetSound = new Audio("Reset.mp3");
 
 function add()
 {
@@ -9,7 +9,7 @@ function add()
 	document.getElementById("counter").textContent = number;
 	counterAnimation();
 	updateCounter();
-	clickSound.play();
+	button.onclick = () => clickSound.play();
 }
 
 function subtract()
@@ -19,7 +19,7 @@ function subtract()
 		document.getElementById("counter").textContent = number;
 		counterAnimation();
 		updateCounter();
-		clickSound.play();
+		button.onclick = () => clickSound.play();
 	}
 }
 
@@ -30,12 +30,12 @@ function reset()
 	document.getElementById("counter").textContent = number;
 	counterAnimationReset();
 	updateCounter();
-	resetSound.play();
+	button.onclick = () => resetSound.play();
 }
 
 function changeBG() {
 	
-	clickSound.play();
+	button.onclick = () => clickSound.play();
 
     let hue = Math.floor(Math.random() * 360);
     let saturation = Math.floor(Math.random() * 70);
@@ -115,6 +115,7 @@ function updateCounter() {
     const digits = String(number).length;
     counter.style.width = `${digits * 10}px`;
 }
+
 
 
 
