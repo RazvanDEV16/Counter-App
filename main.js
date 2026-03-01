@@ -1,4 +1,9 @@
 let number = 0;
+let hue = 0;
+let saturation = 50;
+let brightness = 20;
+let outlineBrightness = 40;
+let colorBrightness = 60;
 
 function add()
 {
@@ -27,25 +32,35 @@ function reset()
 	updateCounter();
 }
 
-function changeBG() {
+ffunction changeBG() {
+    hue = Math.floor(Math.random() * 360);
+    saturation = Math.floor(Math.random() * 70);
+    brightness = Math.floor(Math.random() * 10);
 
-    let hue = Math.floor(Math.random() * 360);
-    let saturation = Math.floor(Math.random() * 70);
-    let brightness = Math.floor(Math.random() * 10);
+    outlineBrightness = Math.min(brightness + 20, 100);
+    colorBrightness = Math.min(brightness + 40, 100);
 
-    document.body.style.background = `hsl(${hue}, ${saturation}%, ${brightness}%)`;
+    applyTheme();
+}
 
-    let outlineBrightness = Math.min(brightness + 20, 100);
-	let colorBrightness = Math.min(brightness + 40, 100);
+function applyTheme() {
+    document.body.style.background =
+        `hsl(${hue}, ${saturation}%, ${brightness}%)`;
 
     document.querySelectorAll("button").forEach(btn => {
-        btn.style.outline = `2px solid hsl(${hue}, ${saturation}%, ${outlineBrightness}%)`;
-		btn.style.color = `hsl(${hue}, ${saturation}%, ${colorBrightness}%)`;
-		btn.style.backgroundcolor = `hsl(${hue}, ${saturation}%, ${colorBrightness}%)`;
+        btn.style.outline =
+            `2px solid hsl(${hue}, ${saturation}%, ${outlineBrightness}%)`;
+        btn.style.color =
+            `hsl(${hue}, ${saturation}%, ${colorBrightness}%)`;
+        btn.style.backgroundColor =
+            `hsl(${hue}, ${saturation}%, ${colorBrightness - 40}%)`;
     });
 
-	document.getElementById("counter").style.color = `hsl(${hue}, ${saturation}%, ${colorBrightness}%)`;
-	document.getElementById("page-title").style.color = `hsl(${hue}, ${saturation}%, ${colorBrightness}%)`;
+    document.getElementById("counter").style.color =
+        `hsl(${hue}, ${saturation}%, ${colorBrightness}%)`;
+
+    document.getElementById("page-title").style.color =
+        `hsl(${hue}, ${saturation}%, ${colorBrightness}%)`;
 }
 
 
@@ -87,18 +102,20 @@ function counterAnimationReset() {
     }, 400);
 }
 
-window.onload = function() {
-	let pageTitle = document.getElementById("page-title");
-	let name = document.getElementById("name");
+window.addEventListener("load", () => {
+    changeBG();
 
-	pageTitle.style.transform = "none";
-	name.style.transform = "none";
+    const pageTitle = document.getElementById("page-title");
+    const name = document.getElementById("name");
 
-	setTimeout(() => {
-		pageTitle.style.transform = "scale(1.4)";
-		name.style.transform = "scale(1.2) translateY(20px)";
-	}, 300);
-};
+    pageTitle.style.transform = "none";
+    name.style.transform = "none";
+
+    setTimeout(() => {
+        pageTitle.style.transform = "scale(1.4)";
+        name.style.transform = "scale(1.2) translateY(20px)";
+    }, 300);
+});
 
 const value = document.querySelector('#counter');
 
@@ -107,6 +124,7 @@ function updateCounter() {
     const digits = String(number).length;
     counter.style.width = `${digits * 10}px`;
 }
+
 
 
 
