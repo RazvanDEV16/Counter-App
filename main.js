@@ -32,7 +32,7 @@ function reset()
 	updateCounter();
 }
 
-ffunction changeBG() {
+function changeBG() {
     hue = Math.floor(Math.random() * 360);
     saturation = Math.floor(Math.random() * 70);
     brightness = Math.floor(Math.random() * 10);
@@ -124,6 +124,7 @@ function updateCounter() {
     const digits = String(number).length;
     counter.style.width = `${digits * 10}px`;
 }
+
 
 
 
